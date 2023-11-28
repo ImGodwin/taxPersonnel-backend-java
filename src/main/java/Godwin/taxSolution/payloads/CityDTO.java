@@ -1,4 +1,6 @@
 package Godwin.taxSolution.payloads;
 
-public class CityDTO {
+import jakarta.validation.constraints.NotEmpty;
+
+public record CityDTO(String name) {
 }
