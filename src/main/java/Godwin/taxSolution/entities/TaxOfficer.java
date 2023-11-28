@@ -13,7 +13,7 @@ import java.util.UUID;
 @Setter
 @ToString
 @Entity
-@Table(name = "cities")
+@Table(name = "tax_officer")
 public class TaxOfficer {
 
     @Id
@@ -24,6 +24,7 @@ public class TaxOfficer {
     private String email;
     private int telephone;
     private String address;
+    private String cityName;
     private int pIva;
     private String description;
     private String image;
