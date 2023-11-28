@@ -2,7 +2,6 @@ package Godwin.taxSolution.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -30,6 +29,6 @@ public class City {
 
     @OneToMany(mappedBy = "city")
     @JsonIgnore
-    private List<TaxOfficer> taxOfficers;
+    private List<TaxPersonnel> taxPersonnel;
 
 }

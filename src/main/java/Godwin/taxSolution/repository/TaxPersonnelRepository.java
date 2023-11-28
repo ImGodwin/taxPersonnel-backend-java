@@ -1,5 +1,5 @@
 package Godwin.taxSolution.repository;
 
-public class TaxOfficerRepository {
+public class TaxPersonnelRepository {
 
 }

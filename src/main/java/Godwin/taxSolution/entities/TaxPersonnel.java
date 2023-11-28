@@ -13,8 +13,8 @@ import java.util.UUID;
 @Setter
 @ToString
 @Entity
-@Table(name = "tax_officer")
-public class TaxOfficer {
+@Table(name = "tax_personnel")
+public class TaxPersonnel {
 
     @Id
     @GeneratedValue
