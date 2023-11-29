@@ -20,14 +20,14 @@ public class CityService {
     @Autowired
     CityRepository cityRepository;
 
-    public Page<City> getAllCities(int page, int size, String orderBy , boolean ascending)
+    /*public Page<City> getAllCities(int page, int size, String orderBy)
     {
         Pageable cityPageable = PageRequest.of(page, size, Sort.by(orderBy));
 
         if (!ascending)cityPageable = PageRequest.of(page, size, Sort.by(orderBy).descending());
 
         return cityRepository.findAll(cityPageable);
-    }
+    }*/
 
     public City findById(UUID uuid) throws NotFoundException {
 
