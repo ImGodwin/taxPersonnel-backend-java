@@ -28,6 +28,7 @@ public class TaxPersonnel {
     private int pIva;
     private String description;
     private String image;
+    private String password;
 
     @CreationTimestamp
     private Date createdAt;
