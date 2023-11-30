@@ -1,14 +1,17 @@
 package Godwin.taxSolution.service;
 
+
 import Godwin.taxSolution.entities.TaxPersonnel;
 import Godwin.taxSolution.exceptions.NotFoundException;
 import Godwin.taxSolution.payloads.TaxPeronnelDTO;
 import Godwin.taxSolution.repository.TaxPersonneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -22,6 +25,10 @@ public class TaxPersonnelService {
 
     @Autowired
     private CityService cityService;
+
+    @Lazy
+    @Autowired
+    private PasswordEncoder bcrypt;
 
     public Page<TaxPersonnel> getTaxPersonnels(int page, int size, String orderBy){
 
@@ -53,6 +60,12 @@ public class TaxPersonnelService {
     public void findDeviceByIdAndDelete(UUID id) throws NotFoundException {
         TaxPersonnel foundDevice = this.findById(id);
         taxPersonneRepository.delete(foundDevice);
+    }
+
+    public TaxPersonnel findByEmail(String email){
+        return taxPersonneRepository.findByEmail(email)
+                .orElseThrow(() ->
+                new NotFoundException("The Email " + email + " was not found"));
     }
 
 }
