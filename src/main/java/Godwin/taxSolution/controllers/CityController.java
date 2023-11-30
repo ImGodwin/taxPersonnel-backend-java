@@ -7,7 +7,6 @@ import Godwin.taxSolution.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +17,7 @@ import java.util.UUID;
 @RequestMapping("/")
 public class CityController {
 
- /*   @Autowired
+    @Autowired
     private CityService cityService;
 
     @GetMapping("")
@@ -39,7 +38,7 @@ public class CityController {
         if (validation.hasErrors()){
             throw new BadRequestException(validation.getAllErrors());
         }
-        return authService.saveCity(newCity);
+        return cityService.saveCity(newCity);
     }
 
     @DeleteMapping("/{id}")
@@ -47,7 +46,7 @@ public class CityController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void findByIdAndDelete(@PathVariable UUID id){
         cityService.findCityByIdAndDelete(id);
-    }*/
+    }
 
 
 }
