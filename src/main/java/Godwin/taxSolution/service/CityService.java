@@ -7,13 +7,17 @@ import Godwin.taxSolution.exceptions.NotFoundException;
 import Godwin.taxSolution.payloads.CityDTO;
 import Godwin.taxSolution.payloads.TaxPeronnelDTO;
 import Godwin.taxSolution.repository.CityRepository;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.UUID;
 
 @Service
@@ -22,6 +26,9 @@ public class CityService {
     //Added getAll, FindById, update and delete... missing save
     @Autowired
     CityRepository cityRepository;
+
+    @Autowired
+    private Cloudinary cloudinary;
 
     public Page<City> getAllCities(int page, int size, String orderBy)
     {
@@ -63,5 +70,9 @@ public class CityService {
         cityRepository.delete(foundCityToDelete);
     }
 
+    public String uploadPicture(MultipartFile file) throws IOException {
+        return (String) cloudinary.uploader().upload(file.getBytes(),
+                ObjectUtils.emptyMap()).get("url");
+    }
 
 }

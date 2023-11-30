@@ -5,6 +5,8 @@ import Godwin.taxSolution.entities.TaxPersonnel;
 import Godwin.taxSolution.exceptions.NotFoundException;
 import Godwin.taxSolution.payloads.TaxPeronnelDTO;
 import Godwin.taxSolution.repository.TaxPersonneRepository;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
@@ -13,7 +15,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.UUID;
 
 @Service
@@ -25,6 +29,9 @@ public class TaxPersonnelService {
 
     @Autowired
     private CityService cityService;
+
+    @Autowired
+    private Cloudinary cloudinary;
 
     @Lazy
     @Autowired
@@ -66,6 +73,18 @@ public class TaxPersonnelService {
         return taxPersonneRepository.findByEmail(email)
                 .orElseThrow(() ->
                 new NotFoundException("The Email " + email + " was not found"));
+    }
+
+    public String uploadPicture(MultipartFile file) throws IOException {
+        return (String) cloudinary.uploader().upload(file.getBytes(),
+                ObjectUtils.emptyMap()).get("url");
+    }
+
+    public TaxPersonnel updateImg(UUID id, String imgUrl){
+        TaxPersonnel exitstingTaxPersonnel = this.findById(id);
+
+        exitstingTaxPersonnel.setImage(imgUrl);
+        return taxPersonneRepository.save(exitstingTaxPersonnel);
     }
 
 }
