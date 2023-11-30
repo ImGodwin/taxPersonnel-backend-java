@@ -3,7 +3,6 @@ package Godwin.taxSolution.controllers;
 import Godwin.taxSolution.entities.TaxPersonnel;
 import Godwin.taxSolution.exceptions.BadRequestException;
 import Godwin.taxSolution.payloads.TaxPeronnelDTO;
-import Godwin.taxSolution.payloads.UpdateTaxPersonnelDTO;
 import Godwin.taxSolution.service.AuthService;
 import Godwin.taxSolution.service.TaxPersonnelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +70,4 @@ public class TaxPersonnelController {
     public void findByIdAndDelete(@PathVariable UUID id){
         taxPersonnelService.findDeviceByIdAndDelete(id);
     }
-
-
 }
