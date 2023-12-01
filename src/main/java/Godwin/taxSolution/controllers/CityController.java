@@ -26,7 +26,7 @@ public class CityController {
     @GetMapping("")
     public Page<City> getCities(@RequestParam(defaultValue = "0") int page,
                                 @RequestParam(defaultValue = "15") int size,
-                                @RequestParam(defaultValue = "created_at") String orderBy,
+                                @RequestParam(defaultValue = "id") String orderBy,
                                 @RequestParam(defaultValue = "true") boolean ascending){
         return cityService.getAllCities(page, size, orderBy, ascending);
     }

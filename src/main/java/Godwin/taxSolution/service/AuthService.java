@@ -64,7 +64,6 @@ public class AuthService {
         addTaxPersonnel.setPassword(bcrypt.encode(newTaxPersonnel.password()));
         addTaxPersonnel.setCity(addCity);
         addTaxPersonnel.setRole(Role.USER);
-
         return taxPersonneRepository.save(addTaxPersonnel);
     }
 }
