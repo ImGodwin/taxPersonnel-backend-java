@@ -27,10 +27,10 @@ public class TaxPersonnel implements UserDetails {
     private String name;
     private String surname;
     private String email;
-    private int telephone;
+    private long telephone;
     private String address;
     private String cityName;
-    private int pIva;
+    private long pIva;
     private String description;
     private String image;
     private String password;

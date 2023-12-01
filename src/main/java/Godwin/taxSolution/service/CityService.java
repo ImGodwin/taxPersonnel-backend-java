@@ -30,7 +30,7 @@ public class CityService {
     @Autowired
     private Cloudinary cloudinary;
 
-    public Page<City> getAllCities(int page, int size, String orderBy)
+    public Page<City> getAllCities(int page, int size, String orderBy, boolean ascending)
     {
         Pageable cityPageable = PageRequest.of(page, size, Sort.by(orderBy));
         return cityRepository.findAll(cityPageable);
@@ -73,6 +73,11 @@ public class CityService {
     public String uploadPicture(MultipartFile file) throws IOException {
         return (String) cloudinary.uploader().upload(file.getBytes(),
                 ObjectUtils.emptyMap()).get("url");
+    }
+
+    public City findCityByName(String name){
+        return cityRepository.findByName(name).
+                orElseThrow(()-> {throw new BadRequestException("City not found");});
     }
 
 }

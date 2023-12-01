@@ -1,11 +1,13 @@
 package Godwin.taxSolution.service;
 
+import Godwin.taxSolution.entities.City;
 import Godwin.taxSolution.entities.Role;
 import Godwin.taxSolution.entities.TaxPersonnel;
 import Godwin.taxSolution.exceptions.BadRequestException;
 import Godwin.taxSolution.exceptions.UnauthorizedException;
 import Godwin.taxSolution.payloads.TaxPeronnelDTO;
 import Godwin.taxSolution.payloads.TaxPersonnelLoginDTO;
+import Godwin.taxSolution.repository.CityRepository;
 import Godwin.taxSolution.repository.TaxPersonneRepository;
 import Godwin.taxSolution.springSecurity.JWTTools;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class AuthService {
 
     @Autowired
     private JWTTools jwtTools;
+
+    @Autowired
+    private CityService cityService;
 
     @Autowired
     private PasswordEncoder bcrypt;
@@ -40,6 +45,7 @@ public class AuthService {
 
     public TaxPersonnel saveTaxPersonnel(TaxPeronnelDTO newTaxPersonnel){
 
+        City addCity = cityService.findCityByName(newTaxPersonnel.cityName());
         taxPersonneRepository.findByEmail(newTaxPersonnel.email()).ifPresent(newTaxPerson -> {
             throw new BadRequestException("The email " + newTaxPerson.getEmail() + " added is already is use");
         });
@@ -54,9 +60,9 @@ public class AuthService {
         addTaxPersonnel.setCityName(newTaxPersonnel.cityName());
         addTaxPersonnel.setPIva(newTaxPersonnel.pIva());
         addTaxPersonnel.setDescription(newTaxPersonnel.description());
-        addTaxPersonnel.setImage("");
         addTaxPersonnel.setImage("http://ui-avatars.com/api/?name="+newTaxPersonnel.name() + "+" + newTaxPersonnel.surname());
         addTaxPersonnel.setPassword(bcrypt.encode(newTaxPersonnel.password()));
+        addTaxPersonnel.setCity(addCity);
         addTaxPersonnel.setRole(Role.USER);
 
         return taxPersonneRepository.save(addTaxPersonnel);

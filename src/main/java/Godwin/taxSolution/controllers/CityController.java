@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/public/city")
 public class CityController {
 
     @Autowired
@@ -26,8 +26,9 @@ public class CityController {
     @GetMapping("")
     public Page<City> getCities(@RequestParam(defaultValue = "0") int page,
                                 @RequestParam(defaultValue = "15") int size,
-                                @RequestParam(defaultValue = "id") String orderBy){
-        return cityService.getAllCities(page, size, orderBy);
+                                @RequestParam(defaultValue = "created_at") String orderBy,
+                                @RequestParam(defaultValue = "true") boolean ascending){
+        return cityService.getAllCities(page, size, orderBy, ascending);
     }
 
     @GetMapping(value = "/{id}")

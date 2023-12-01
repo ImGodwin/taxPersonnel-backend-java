@@ -1,6 +1,7 @@
 package Godwin.taxSolution.payloads;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
@@ -11,11 +12,10 @@ public record TaxPeronnelDTO(@NotEmpty(message = "Please add name") String name,
                              @NotEmpty(message = "Please add an email")
                              @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "Incorrect email pattern")
                              String email,
-                             @NotEmpty(message = "Please add a telephone number") @Size(message = "Number must be max 10 digits excluding +39", min = 10, max = 10) int telephone,
+                             @NotNull(message = "Please add a telephone number") long telephone,
                              @NotEmpty(message = "Please include an address") String address,
                              @NotEmpty(message = "Please add city name") String cityName,
-                             @NotEmpty(message = "Please add your Partita Iva") @Size(message = "number must be 8 digits", min = 8, max = 8) int pIva,
+                             @NotNull(message = "Please add your Partita Iva") long pIva,
                              @NotEmpty(message = "Please add a short description") @Size(max = 100 ) String description,
-                             @NotEmpty(message = "Please add a password") String password,
-                             @NotEmpty(message = "Pòease include an address") UUID city) {
+                             @NotEmpty(message = "Please add a password") String password) {
 }
