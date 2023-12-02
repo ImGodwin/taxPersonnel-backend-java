@@ -26,14 +26,12 @@ public class AuthController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public TaxPersonnelLoginSuccessDTO saveNewEmployee(@RequestBody @Validated TaxPeronnelDTO body, BindingResult validation){
+    public TaxPersonnel saveNewEmployee(@RequestBody @Validated TaxPeronnelDTO body, BindingResult validation){
         if(validation.hasErrors()){
             throw new BadRequestException(validation.getAllErrors());
         }else {
             try {
-                TaxPersonnel registerNewTaxPersonnel = authService.saveTaxPersonnel(body);
-                return new TaxPersonnelLoginSuccessDTO(authService.authTaxPeronnel(new TaxPersonnelLoginDTO(registerNewTaxPersonnel
-                        .getEmail(), body.password())));
+               return authService.saveTaxPersonnel(body);
             }catch (Exception ex){
                 throw new RuntimeException(ex);
             }
