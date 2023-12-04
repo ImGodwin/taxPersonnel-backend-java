@@ -3,6 +3,7 @@ package Godwin.taxSolution.controllers;
 import Godwin.taxSolution.entities.TaxPersonnel;
 import Godwin.taxSolution.exceptions.BadRequestException;
 import Godwin.taxSolution.payloads.TaxPersonnelDTO;
+import Godwin.taxSolution.payloads.TaxPersonnelLoginDTO;
 import Godwin.taxSolution.service.AuthService;
 import Godwin.taxSolution.service.TaxPersonnelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +81,7 @@ public class TaxPersonnelController {
         return currentUser;
     }
 
-    @PutMapping("/update-profile")
+    @PutMapping("/update/profile")
     public UserDetails updateMyProfile(@AuthenticationPrincipal TaxPersonnel currentPersonnel,
                                        @RequestBody TaxPersonnelDTO body){
         return taxPersonnelService.findByIdAndUpdate(currentPersonnel.getId(), body);

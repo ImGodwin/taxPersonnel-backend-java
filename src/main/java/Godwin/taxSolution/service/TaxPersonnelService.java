@@ -33,9 +33,6 @@ public class TaxPersonnelService {
     @Autowired
     private Cloudinary cloudinary;
 
-    @Lazy
-    @Autowired
-    private PasswordEncoder bcrypt;
 
     public Page<TaxPersonnel> getTaxPersonnels(int page, int size, String orderBy){
 

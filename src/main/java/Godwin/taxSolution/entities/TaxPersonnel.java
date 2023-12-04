@@ -1,5 +1,6 @@
 package Godwin.taxSolution.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +20,7 @@ import java.util.UUID;
 @ToString
 @Entity
 @Table(name = "tax_personnel")
+@JsonIgnoreProperties({"password", "authorities", "enabled","accountNonLocked", "credentialsNonExpired"})
 public class TaxPersonnel implements UserDetails {
 
     @Id
