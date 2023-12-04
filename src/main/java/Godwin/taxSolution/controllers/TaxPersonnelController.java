@@ -40,12 +40,6 @@ public class TaxPersonnelController {
         return taxPersonnelService.findById(id);
     }
 
-    @GetMapping("/me")
-    public UserDetails getMyProfile(@AuthenticationPrincipal TaxPersonnel currentPersonnel,
-                                    @RequestBody TaxPersonnelDTO body){
-        return taxPersonnelService.findByIdAndUpdate(currentPersonnel.getId(), body);
-    }
-
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public TaxPersonnel saveNewTaxPersonnel(@RequestBody @Validated TaxPersonnelDTO newTaxPersonnel, BindingResult validation){
@@ -56,6 +50,7 @@ public class TaxPersonnelController {
     }
 
     @PutMapping("/{id}")
+    //@PreAuthorize("hasAuthority('Admin')")
     @ResponseStatus(HttpStatus.CREATED)
     public TaxPersonnel findByIdAndUpdate(@PathVariable UUID id, @RequestBody @Validated TaxPersonnelDTO body, BindingResult validation){
         if (validation.hasErrors()) {
@@ -78,4 +73,22 @@ public class TaxPersonnelController {
     public void findByIdAndDelete(@PathVariable UUID id){
         taxPersonnelService.findDeviceByIdAndDelete(id);
     }
+
+    //Personalized Enpoints
+    @GetMapping("/my-profile")
+    public UserDetails getMyProfile(@AuthenticationPrincipal UserDetails currentUser){
+        return currentUser;
+    }
+
+    @PutMapping("/update-profile")
+    public UserDetails updateMyProfile(@AuthenticationPrincipal TaxPersonnel currentPersonnel,
+                                       @RequestBody TaxPersonnelDTO body){
+        return taxPersonnelService.findByIdAndUpdate(currentPersonnel.getId(), body);
+    }
+
+    @DeleteMapping("/my-profile")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteProfile(@AuthenticationPrincipal TaxPersonnel currentUser) {
+        taxPersonnelService.findDeviceByIdAndDelete(currentUser.getId());
+    };
 }
