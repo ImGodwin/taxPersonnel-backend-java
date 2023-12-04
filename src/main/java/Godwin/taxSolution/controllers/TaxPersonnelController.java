@@ -2,13 +2,15 @@ package Godwin.taxSolution.controllers;
 
 import Godwin.taxSolution.entities.TaxPersonnel;
 import Godwin.taxSolution.exceptions.BadRequestException;
-import Godwin.taxSolution.payloads.TaxPeronnelDTO;
+import Godwin.taxSolution.payloads.TaxPersonnelDTO;
 import Godwin.taxSolution.service.AuthService;
 import Godwin.taxSolution.service.TaxPersonnelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -38,9 +40,15 @@ public class TaxPersonnelController {
         return taxPersonnelService.findById(id);
     }
 
+    @GetMapping("/me")
+    public UserDetails getMyProfile(@AuthenticationPrincipal TaxPersonnel currentPersonnel,
+                                    @RequestBody TaxPersonnelDTO body){
+        return taxPersonnelService.findByIdAndUpdate(currentPersonnel.getId(), body);
+    }
+
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public TaxPersonnel saveNewTaxPersonnel(@RequestBody @Validated TaxPeronnelDTO newTaxPersonnel, BindingResult validation){
+    public TaxPersonnel saveNewTaxPersonnel(@RequestBody @Validated TaxPersonnelDTO newTaxPersonnel, BindingResult validation){
         if (validation.hasErrors()){
             throw new BadRequestException(validation.getAllErrors());
         }
@@ -49,7 +57,7 @@ public class TaxPersonnelController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public TaxPersonnel findByIdAndUpdate(@PathVariable UUID id, @RequestBody @Validated TaxPeronnelDTO body, BindingResult validation){
+    public TaxPersonnel findByIdAndUpdate(@PathVariable UUID id, @RequestBody @Validated TaxPersonnelDTO body, BindingResult validation){
         if (validation.hasErrors()) {
             throw new BadRequestException(validation.getAllErrors());
         }

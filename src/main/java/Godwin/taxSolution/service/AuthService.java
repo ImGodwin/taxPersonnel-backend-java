@@ -5,7 +5,7 @@ import Godwin.taxSolution.entities.Role;
 import Godwin.taxSolution.entities.TaxPersonnel;
 import Godwin.taxSolution.exceptions.BadRequestException;
 import Godwin.taxSolution.exceptions.UnauthorizedException;
-import Godwin.taxSolution.payloads.TaxPeronnelDTO;
+import Godwin.taxSolution.payloads.TaxPersonnelDTO;
 import Godwin.taxSolution.payloads.TaxPersonnelLoginDTO;
 import Godwin.taxSolution.repository.TaxPersonneRepository;
 import Godwin.taxSolution.springSecurity.JWTTools;
@@ -42,7 +42,7 @@ public class AuthService {
         }
     }
 
-    public TaxPersonnel saveTaxPersonnel(TaxPeronnelDTO newTaxPersonnel){
+    public TaxPersonnel saveTaxPersonnel(TaxPersonnelDTO newTaxPersonnel){
 
         City addCity = cityService.findCityByName(newTaxPersonnel.cityName());
         taxPersonneRepository.findByEmail(newTaxPersonnel.email()).ifPresent(newTaxPerson -> {

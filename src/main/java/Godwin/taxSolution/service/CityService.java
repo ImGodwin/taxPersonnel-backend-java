@@ -1,11 +1,9 @@
 package Godwin.taxSolution.service;
 
 import Godwin.taxSolution.entities.City;
-import Godwin.taxSolution.entities.TaxPersonnel;
 import Godwin.taxSolution.exceptions.BadRequestException;
 import Godwin.taxSolution.exceptions.NotFoundException;
 import Godwin.taxSolution.payloads.CityDTO;
-import Godwin.taxSolution.payloads.TaxPeronnelDTO;
 import Godwin.taxSolution.repository.CityRepository;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;

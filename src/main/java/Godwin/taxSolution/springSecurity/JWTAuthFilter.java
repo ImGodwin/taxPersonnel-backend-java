@@ -42,8 +42,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
             String id = jwtTools.extractIdFromToken(token);
             TaxPersonnel taxPersonnelService1= taxPersonnelService.findById(UUID.fromString(id));
 
-            Authentication authentication = new  UsernamePasswordAuthenticationToken(taxPersonnelService1, null,
-                    taxPersonnelService1.getAuthorities());
+            Authentication authentication = new  UsernamePasswordAuthenticationToken(taxPersonnelService1, null, taxPersonnelService1.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             filterChain.doFilter(request, response);

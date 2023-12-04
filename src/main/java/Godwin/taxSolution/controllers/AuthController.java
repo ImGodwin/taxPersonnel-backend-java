@@ -2,7 +2,7 @@ package Godwin.taxSolution.controllers;
 
 import Godwin.taxSolution.entities.TaxPersonnel;
 import Godwin.taxSolution.exceptions.BadRequestException;
-import Godwin.taxSolution.payloads.TaxPeronnelDTO;
+import Godwin.taxSolution.payloads.TaxPersonnelDTO;
 import Godwin.taxSolution.payloads.TaxPersonnelLoginDTO;
 import Godwin.taxSolution.payloads.TaxPersonnelLoginSuccessDTO;
 import Godwin.taxSolution.service.AuthService;
@@ -26,7 +26,7 @@ public class AuthController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public TaxPersonnel saveNewEmployee(@RequestBody @Validated TaxPeronnelDTO body, BindingResult validation){
+    public TaxPersonnel saveNewEmployee(@RequestBody @Validated TaxPersonnelDTO body, BindingResult validation){
         if(validation.hasErrors()){
             throw new BadRequestException(validation.getAllErrors());
         }else {

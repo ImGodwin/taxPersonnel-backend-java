@@ -3,7 +3,7 @@ package Godwin.taxSolution.service;
 
 import Godwin.taxSolution.entities.TaxPersonnel;
 import Godwin.taxSolution.exceptions.NotFoundException;
-import Godwin.taxSolution.payloads.TaxPeronnelDTO;
+import Godwin.taxSolution.payloads.TaxPersonnelDTO;
 import Godwin.taxSolution.repository.TaxPersonneRepository;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
@@ -48,7 +48,7 @@ public class TaxPersonnelService {
         return taxPersonneRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
-    public TaxPersonnel findByIdAndUpdate(UUID id, TaxPeronnelDTO body)
+    public TaxPersonnel findByIdAndUpdate(UUID id, TaxPersonnelDTO body)
     {
         TaxPersonnel taxPersonnel = this.findById(id);
 
