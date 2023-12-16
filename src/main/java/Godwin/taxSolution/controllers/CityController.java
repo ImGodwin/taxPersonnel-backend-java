@@ -45,6 +45,23 @@ public class CityController {
         return cityService.saveCity(newCity);
     }
 
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public City findByIdAndUpdate(@PathVariable UUID id, @RequestBody @Validated CityDTO body, BindingResult validation){
+        if (validation.hasErrors()) {
+            throw new BadRequestException(validation.getAllErrors());
+        }
+        return cityService.findCityByIdAndUpdate(id, body);
+    }
+
+    @PostMapping("/{id}/uploadPhoto")
+    public City uploadEmployeeImage(@PathVariable UUID id, @RequestParam("file") MultipartFile body) throws IOException {
+        System.out.println(body.getSize());
+        System.out.println(body.getContentType());
+        String uploadImageUrl = cityService.uploadPicture(body);
+        return cityService.updateImg(id, uploadImageUrl);
+    }
+
     @DeleteMapping("/{id}")
     //@PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
