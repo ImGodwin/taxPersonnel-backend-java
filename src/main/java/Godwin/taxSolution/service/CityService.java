@@ -73,6 +73,12 @@ public class CityService {
                 ObjectUtils.emptyMap()).get("url");
     }
 
+    public City updateImg(UUID id, String imgURL){
+        City existingCity = this.findById(id);
+        existingCity.setAvatar(imgURL);
+        return  cityRepository.save(existingCity);
+    }
+
     public City findCityByName(String name){
         return cityRepository.findByName(name).
                 orElseThrow(()-> {throw new BadRequestException("City not found");});

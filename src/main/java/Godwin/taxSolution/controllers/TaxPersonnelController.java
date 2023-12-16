@@ -51,7 +51,7 @@ public class TaxPersonnelController {
     }
 
     @PutMapping("/{id}")
-    //@PreAuthorize("hasAuthority('Admin')")
+    @PreAuthorize("hasAuthority('Admin')")
     @ResponseStatus(HttpStatus.CREATED)
     public TaxPersonnel findByIdAndUpdate(@PathVariable UUID id, @RequestBody @Validated TaxPersonnelDTO body, BindingResult validation){
         if (validation.hasErrors()) {

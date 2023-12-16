@@ -51,7 +51,6 @@ public class TaxPersonnelService {
 
         taxPersonnel.setName(body.name());
         taxPersonnel.setSurname(body.surname());
-        taxPersonnel.setEmail(body.email());
         taxPersonnel.setTelephone(body.telephone());
         taxPersonnel.setAddress(body.address());
         taxPersonnel.setCityName(body.cityName());
