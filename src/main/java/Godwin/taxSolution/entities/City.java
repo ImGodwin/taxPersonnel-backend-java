@@ -22,6 +22,8 @@ public class City {
     @GeneratedValue
     private UUID id;
     private String name;
+    private int latitude;
+    private int longitude;
     private String avatar;
 
     @CreationTimestamp

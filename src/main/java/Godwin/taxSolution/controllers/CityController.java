@@ -54,7 +54,7 @@ public class CityController {
         return cityService.findCityByIdAndUpdate(id, body);
     }
 
-    @PostMapping("/{id}/uploadPhoto")
+    @PostMapping("/{id}/upload-photo")
     public City uploadEmployeeImage(@PathVariable UUID id, @RequestParam("file") MultipartFile body) throws IOException {
         System.out.println(body.getSize());
         System.out.println(body.getContentType());

@@ -69,7 +69,7 @@ public class TaxPersonnelController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void findByIdAndDelete(@PathVariable UUID id){
         taxPersonnelService.findDeviceByIdAndDelete(id);
@@ -81,7 +81,7 @@ public class TaxPersonnelController {
         return currentUser;
     }
 
-    @PutMapping("/update/profile")
+    @PutMapping("/update-profile")
     public UserDetails updateMyProfile(@AuthenticationPrincipal TaxPersonnel currentPersonnel,
                                        @RequestBody TaxPersonnelDTO body){
         return taxPersonnelService.findByIdAndUpdate(currentPersonnel.getId(), body);

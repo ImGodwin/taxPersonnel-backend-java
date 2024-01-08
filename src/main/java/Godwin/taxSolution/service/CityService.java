@@ -44,6 +44,8 @@ public class CityService {
 
         newCity.setName(body.name());
         newCity.setAvatar("https://picsum.photos/id/1/200/300");
+        newCity.setLatitude(body.latitude());
+        newCity.setLongitude(body.longitude());
         return cityRepository.save(newCity);
     }
 
