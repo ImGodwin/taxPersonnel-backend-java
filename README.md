@@ -14,9 +14,13 @@ Java and Spring
 
 ### Prerequisites 
 
-*[jdk](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+* [jdk](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 
-*[maven](https://maven.apache.org/) 
+* [maven](https://maven.apache.org/) 
+
+* [Postgres](https://www.postgresql.org/download/) 
+
+
 
 ``` shell 
 # clone github repo 
